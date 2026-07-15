@@ -1,643 +1,394 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portafolio Electrónico — Daniela Guadalupe Rocha López</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --navy: #0d1b2a;
-      --navy-mid: #1b2d42;
-      --gold: #c9a84c;
-      --gold-light: #e8c97a;
-      --cream: #f5f0e8;
-      --cream-dark: #e8e0d0;
-      --text: #1a1a2e;
-      --text-light: #4a4a6a;
-      --white: #ffffff;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti</title>
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<!--
+  ✏️ CÓMO EDITAR ESTA CARTA
+  Busca los textos entre [corchetes] más abajo (nombre, ciudad, fecha, firma)
+  y los tres párrafos dentro de <div class="body-text"> y reemplázalos por tus
+  propias palabras. Todo lo demás (diseño, animación) ya está listo.
+-->
 
-    html { scroll-behavior: smooth; }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Special+Elite&display=swap" rel="stylesheet">
 
-    body {
-      font-family: 'Lato', sans-serif;
-      background-color: var(--cream);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+<style>
+  :root{
+    --sky-top:#3a2620;
+    --sky-bottom:#6e4a3a;
+    --paper:#f8ece7;
+    --paper-shadow:#e6c7be;
+    --ink:#3c2620;
+    --ink-soft:#7c5a4e;
+    --envelope:#6b4433;
+    --envelope-dark:#452a1f;
+    --envelope-flap:#7d5240;
+    --rose:#e08a9d;
+    --rose-dark:#c15f79;
+    --gold:#c4907e;
+  }
 
-    /* ── HEADER ── */
-    header {
-      background: var(--navy);
-      color: var(--white);
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-    }
+  *{box-sizing:border-box;}
 
-    .header-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 40px,
-          rgba(201,168,76,0.04) 40px,
-          rgba(201,168,76,0.04) 41px
-        );
-    }
+  html,body{
+    margin:0;
+    min-height:100%;
+    background:linear-gradient(180deg,var(--sky-top),var(--sky-bottom));
+    font-family:'EB Garamond', serif;
+    color:var(--ink);
+    overflow-x:hidden;
+  }
 
-    .header-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 70px 40px 60px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-    }
+  body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 16px;
+    position:relative;
+  }
 
-    .header-label {
-      font-family: 'Lato', sans-serif;
-      font-weight: 700;
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border-left: 3px solid var(--gold);
-      padding-left: 12px;
-    }
+  /* soft ambient glow behind everything */
+  .sky-glow{
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 30%, rgba(224,138,157,0.12), transparent 70%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(196,144,126,0.10), transparent 70%);
+    pointer-events:none;
+  }
 
-    .header-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 700;
-      line-height: 1.1;
-      color: var(--white);
-    }
+  .scene{
+    position:relative;
+    width:100%;
+    max-width:520px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:420px;
+  }
 
-    .header-title em {
-      font-style: italic;
-      color: var(--gold-light);
-    }
+  /* ---------- ENVELOPE ---------- */
 
-    .header-name {
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      font-size: 1rem;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.65);
-      margin-top: 6px;
-    }
+  .envelope-wrap{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:22px;
+    transition:opacity .6s ease, transform .6s ease;
+  }
 
-    .header-divider {
-      width: 60px;
-      height: 2px;
-      background: var(--gold);
-      margin-top: 8px;
-    }
+  .envelope-wrap.hidden{
+    opacity:0;
+    transform:scale(.92);
+    pointer-events:none;
+    position:absolute;
+  }
 
-    /* ── NAV ── */
-    nav {
-      background: var(--navy-mid);
-      border-bottom: 2px solid var(--gold);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+  .envelope{
+    position:relative;
+    width:280px;
+    height:190px;
+    perspective:1200px;
+  }
 
-    .nav-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 40px;
-      display: flex;
-      gap: 0;
-      overflow-x: auto;
-    }
+  .envelope-back{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg,var(--envelope),var(--envelope-dark));
+    border-radius:6px;
+    box-shadow:0 22px 40px -14px rgba(10,14,25,0.55);
+  }
 
-    .nav-inner a {
-      font-family: 'Lato', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-      text-decoration: none;
-      padding: 14px 20px;
-      border-bottom: 3px solid transparent;
-      transition: color 0.2s, border-color 0.2s;
-      white-space: nowrap;
-    }
+  .envelope-back::before,
+  .envelope-back::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    width:0;
+    height:0;
+    border-style:solid;
+  }
+  .envelope-back::before{
+    left:0;
+    border-width:0 0 96px 140px;
+    border-color:transparent transparent rgba(0,0,0,0.12) transparent;
+  }
+  .envelope-back::after{
+    right:0;
+    border-width:0 140px 96px 0;
+    border-color:transparent transparent rgba(0,0,0,0.12) transparent;
+  }
 
-    .nav-inner a:hover {
-      color: var(--gold-light);
-      border-bottom-color: var(--gold);
-    }
+  .envelope-letter-peek{
+    position:absolute;
+    left:10px;
+    right:10px;
+    top:8px;
+    height:150px;
+    background:linear-gradient(180deg,var(--paper),#eae2d0);
+    border-radius:3px;
+    box-shadow:0 6px 14px rgba(0,0,0,0.25);
+    transition:transform .5s ease .35s;
+  }
 
-    /* ── MAIN ── */
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 40px 80px;
-    }
+  .envelope-flap{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100px;
+    background:linear-gradient(160deg,var(--envelope-flap),var(--envelope));
+    clip-path:polygon(0 0, 100% 0, 50% 88%);
+    transform-origin:top center;
+    transform:rotateX(0deg);
+    transition:transform .7s cubic-bezier(.6,.05,.35,1);
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    z-index:3;
+  }
 
-    /* ── SECTION TITLE ── */
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 36px;
-    }
+  .envelope-wrap.opening .envelope-flap{
+    transform:rotateX(180deg);
+  }
 
-    .section-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--navy);
-    }
+  .envelope-wrap.opening .envelope-letter-peek{
+    transform:translateY(-38px);
+  }
 
-    .section-header .line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, var(--gold), transparent);
-    }
+  .seal{
+    position:absolute;
+    left:50%;
+    top:78px;
+    transform:translate(-50%,-50%);
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    background:radial-gradient(circle at 35% 30%, var(--rose), var(--rose-dark));
+    box-shadow:0 6px 14px rgba(0,0,0,0.35), inset 0 -3px 6px rgba(0,0,0,0.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:4;
+    transition:transform .45s ease, opacity .45s ease;
+  }
 
-    /* ── ABOUT ── */
-    #sobre-mi {
-      background: var(--white);
-      border: 1px solid var(--cream-dark);
-      border-left: 4px solid var(--gold);
-      border-radius: 2px;
-      padding: 36px 40px;
-      margin-bottom: 60px;
-      animation: fadeUp 0.6s ease both;
-    }
+  .seal:hover{ transform:translate(-50%,-50%) scale(1.06); }
+  .seal:focus-visible{ outline:3px solid var(--gold); outline-offset:3px; }
 
-    #sobre-mi p {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--text-light);
-    }
+  .seal svg{ width:24px; height:24px; fill:none; stroke:#f3ede0; stroke-width:1.4; }
 
-    #sobre-mi strong {
-      color: var(--navy);
-    }
+  .envelope-wrap.opening .seal{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.4) rotate(25deg);
+  }
 
-    /* ── ACTIVITIES GRID ── */
-    #actividades {
-      margin-bottom: 60px;
-    }
+  .envelope-label{
+    font-family:'Caveat', cursive;
+    font-size:1.5rem;
+    color:#f2ddd3;
+    margin:0;
+    letter-spacing:.5px;
+  }
 
-    .activities-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-    }
+  .hint{
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    font-size:.95rem;
+    color:#e3c3b8;
+    margin:0;
+    animation:breathe 2.6s ease-in-out infinite;
+  }
 
-    .activity-card {
-      background: var(--white);
-      border: 1px solid var(--cream-dark);
-      border-radius: 2px;
-      overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      animation: fadeUp 0.5s ease both;
-      display: flex;
-      flex-direction: column;
-    }
+  .envelope-wrap.opening .hint{ opacity:0; }
 
-    .activity-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(13,27,42,0.12);
-    }
+  @keyframes breathe{
+    0%,100%{ opacity:.55; }
+    50%{ opacity:1; }
+  }
 
-    .card-number {
-      background: var(--navy);
-      color: var(--gold);
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-style: italic;
-      padding: 18px 24px 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+  /* ---------- LETTER ---------- */
 
-    .card-number span.label {
-      font-family: 'Lato', sans-serif;
-      font-style: normal;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-    }
+  .letter-wrap{
+    opacity:0;
+    transform:translateY(30px) scale(.98);
+    transition:opacity .7s ease, transform .7s ease;
+    pointer-events:none;
+    width:100%;
+    display:flex;
+    justify-content:center;
+  }
 
-    .card-body {
-      padding: 20px 24px 24px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+  .letter-wrap.visible{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+  }
 
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--navy);
-      line-height: 1.4;
-    }
+  .letter{
+    position:relative;
+    width:100%;
+    max-width:480px;
+    max-height:82vh;
+    overflow-y:auto;
+    background:linear-gradient(180deg,var(--paper),#ece3cf);
+    border-radius:4px;
+    padding:44px 40px 36px;
+    box-shadow:
+      0 30px 60px -20px rgba(10,14,25,0.5),
+      0 2px 0 #fff8 inset;
+  }
 
-    .card-desc {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      line-height: 1.6;
-      flex: 1;
-    }
+  .letter::-webkit-scrollbar{ width:8px; }
+  .letter::-webkit-scrollbar-thumb{ background:var(--paper-shadow); border-radius:8px; }
 
-    .card-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 6px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--gold);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s, color 0.2s;
-      width: fit-content;
-    }
+  .letter-fold{
+    position:absolute;
+    left:0;
+    right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, rgba(0,0,0,0.10), transparent);
+    pointer-events:none;
+  }
+  .fold-1{ top:33%; }
+  .fold-2{ top:66%; }
 
-    .card-link:hover {
-      border-bottom-color: var(--gold);
-      color: var(--navy);
-    }
+  .date{
+    font-family:'Special Elite', monospace;
+    font-size:.78rem;
+    color:var(--ink-soft);
+    text-align:right;
+    letter-spacing:.5px;
+    margin:0 0 22px;
+  }
 
-    .card-link svg {
-      width: 14px; height: 14px;
-      transition: transform 0.2s;
-    }
+  .salutation{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:2.4rem;
+    color:var(--rose-dark);
+    margin:0 0 18px;
+    line-height:1;
+  }
 
-    .card-link:hover svg {
-      transform: translateX(3px);
-    }
+  .body-text p{
+    font-size:1.12rem;
+    line-height:1.75;
+    color:var(--ink);
+    margin:0 0 16px;
+  }
 
-    /* ── EDIT NOTICE ── */
-    .edit-notice {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-      color: var(--white);
-      border-radius: 2px;
-      padding: 30px 36px;
-      margin-bottom: 60px;
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-    }
+  .closing{
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    margin:26px 0 2px;
+  }
 
-    .edit-notice .icon {
-      font-size: 1.8rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
+  .signature{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:2.1rem;
+    color:var(--rose-dark);
+    margin:0 0 22px;
+  }
 
-    .edit-notice h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--gold-light);
-      margin-bottom: 6px;
-    }
+  .ps{
+    font-size:.98rem;
+    font-style:italic;
+    color:var(--ink-soft);
+    border-top:1px dashed var(--paper-shadow);
+    padding-top:14px;
+    margin:0;
+  }
 
-    .edit-notice p {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.7;
-    }
+  @media (max-width:400px){
+    .letter{ padding:34px 24px 28px; }
+    .salutation{ font-size:2rem; }
+  }
 
-    .edit-notice code {
-      background: rgba(201,168,76,0.2);
-      color: var(--gold-light);
-      padding: 1px 6px;
-      border-radius: 3px;
-      font-size: 0.85em;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--navy);
-      color: rgba(255,255,255,0.4);
-      text-align: center;
-      padding: 28px 40px;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
-    }
-
-    footer strong {
-      color: var(--gold);
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .activity-card:nth-child(1)  { animation-delay: 0.05s; }
-    .activity-card:nth-child(2)  { animation-delay: 0.10s; }
-    .activity-card:nth-child(3)  { animation-delay: 0.15s; }
-    .activity-card:nth-child(4)  { animation-delay: 0.20s; }
-    .activity-card:nth-child(5)  { animation-delay: 0.25s; }
-    .activity-card:nth-child(6)  { animation-delay: 0.30s; }
-    .activity-card:nth-child(7)  { animation-delay: 0.35s; }
-    .activity-card:nth-child(8)  { animation-delay: 0.40s; }
-    .activity-card:nth-child(9)  { animation-delay: 0.45s; }
-    .activity-card:nth-child(10) { animation-delay: 0.50s; }
-    .activity-card:nth-child(11) { animation-delay: 0.55s; }
-    .activity-card:nth-child(12) { animation-delay: 0.60s; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      .header-inner { padding: 50px 24px 40px; }
-      main { padding: 40px 24px 60px; }
-      .nav-inner { padding: 0 16px; }
-      #sobre-mi { padding: 24px 20px; }
-      .edit-notice { padding: 22px 20px; flex-direction: column; gap: 12px; }
-    }
-  </style>
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-bg"></div>
-    <div class="header-inner">
-      <div class="header-label">Portafolio Académico</div>
-      <h1 class="header-title">Portafolio<br/><em>Electrónico</em></h1>
-      <p class="header-name">Daniela Guadalupe Rocha López</p>
-      <div class="header-divider"></div>
+<div class="sky-glow"></div>
+
+<div class="scene">
+
+  <div class="envelope-wrap" id="envelopeWrap">
+    <div class="envelope">
+      <div class="envelope-back"></div>
+      <div class="envelope-letter-peek"></div>
+      <div class="envelope-flap"></div>
+      <button class="seal" id="sealBtn" aria-label="Abrir la carta">
+        <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.35-9.5-8.2C.6 8.7 2 5 5.4 5c2 0 3.4 1.2 4.1 2.4.2.3.6.3.8 0C11.2 6.2 12.6 5 14.6 5 18 5 19.4 8.7 21.5 11.8 19 15.65 12 20 12 20z"/></svg>
+      </button>
+      <p class="envelope-label">Para ti</p>
     </div>
-  </header>
+    <p class="hint">toca el sello para abrir</p>
+  </div>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-inner">
-      <a href="#sobre-mi">Presentación</a>
-      <a href="#actividades">Actividades</a>
-    </div>
-  </nav>
+  <div class="letter-wrap" id="letterWrap" aria-hidden="true">
+    <div class="letter">
+      <div class="letter-fold fold-1"></div>
+      <div class="letter-fold fold-2"></div>
 
-  <main>
+      <p class="date">— Ensenada, 14 Julio —</p>
 
-    <!-- ABOUT -->
-    <section id="sobre-mi">
-      <p>
-        Bienvenido/a a mi <strong>Portafolio Electrónico</strong>. En este espacio presento el conjunto
-        de actividades desarrolladas a lo largo del curso, reflejando mi proceso de aprendizaje,
-        habilidades adquiridas y evidencias de trabajo académico.
-        — <strong>Daniela Guadalupe Rocha López</strong>
-      </p>
-    </section>
+      <h1 class="salutation">Querida Lupita,</h1>
 
-
-    <!-- ACTIVITIES -->
-    <section id="actividades">
-      <div class="section-header">
-        <h2>Actividades</h2>
-        <div class="line"></div>
+      <div class="body-text">
+        <p>
+          Llevo un rato mirando la pantalla en blanco porque no sabía cómo empezar,
+          así que voy a decirlo de la forma más sencilla lo siento. Sé que te hice daño y no quiero
+          buscar excusas ni explicaciones que suenen mejor de lo que en realidad fue.
+        </p>
+        <p>
+          Pensé mucho en lo que pasó, y en lo que significas para mí. Me equivoqué,
+          y esa equivocación pesa más porque fue contigo, con quien menos sentirme así. No espero que esto borre nada, solo quiero que sepas que lo veo,
+          que me hago cargo, y que voy a esforzarme por hacerlo distinto, buscando ayuda como tu lo haces.
+        </p>
+        <p>
+          Gracias por todo lo que hemos construido hasta ahora. Reconozco tus ganas de mejorar y superarte como persona,
+          intentaré actuar con más cuidado y más paciencia de la que tuve. Siempre estás en mi cabecita.
+        </p>
       </div>
 
-      <!-- INSTRUCCIÓN para editar -->
-      <div class="edit-notice">
-        <div class="icon">✏️</div>
-        <div>
-          <h3>Reflexión: Las TICC en mi práctica profesional como Administradora de Empresas</h3>
-          <p>
-            Cursar esta materia me ha permitido comprender que las TICC no son un complemento, sino una base fundamental para ejercer la administración en el mundo actual. Desde el manejo de herramientas ofimáticas para optimizar procesos, hasta el uso de plataformas de e-learning y colaboración en línea, cada unidad refleja habilidades que aplicaré directamente en mi vida profesional.
-Saber organizar y resguardar información de forma segura, producir y difundir contenido con criterio, y aprovechar la tecnología para tomar mejores decisiones, me convierte en una profesional más competente, crítica y adaptable. En un entorno empresarial que cambia constantemente, dominar estas tecnologías no es una ventaja: es una responsabilidad.
-          </p>
-        </div>
-      </div>
+      <p class="closing">Con todo mi amor,</p>
+      <p class="signature">El Joaquinais</p>
 
-      <div class="activities-grid">
+      <p class="ps">Ya estamos próximos a cumplir un año y quiero que sean muchos más a tu lado</p>
+    </div>
+  </div>
 
-        <!-- Tarjeta modelo — duplica este bloque para cada actividad -->
-        <div class="activity-card">
-          <div class="card-number">01 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 1.1</div>
-            <div class="card-desc">Proyecto Brochure (Folleto)</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1SSbsSbWF42VIBZmfwT4nf23I2hkJXCgz/view?usp=sharing" target="_blank">
-              Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </a>
-          </div>
-        </div>
+</div>
 
-        <div class="activity-card">
-          <div class="card-number">02 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 2.1</div>
-            <div class="card-desc">Práctica en Google Docs (Documento).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1GCqNlG2mZHvCmhxL-FnBF_aZRKgWpqPO/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
+<script>
+  const envelopeWrap = document.getElementById('envelopeWrap');
+  const letterWrap = document.getElementById('letterWrap');
+  const sealBtn = document.getElementById('sealBtn');
 
-        <div class="activity-card">
-          <div class="card-number">03 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 2.1</div>
-            <div class="card-desc">Práctica en Google Docs (Presentación).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1sY5zko7-EdR8D5p8LUCeRhhWLTgBHXZS/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
+  sealBtn.addEventListener('click', () => {
+    if (envelopeWrap.classList.contains('opening')) return;
+    envelopeWrap.classList.add('opening');
 
-        <div class="activity-card">
-          <div class="card-number">04 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 2.2</div>
-            <div class="card-desc">Hoja de cálculo, organizador gráfico (Práctica)</div>
-            <a class="card-link" href="https://docs.google.com/spreadsheets/d/1DvZfIVSsy1DLrDdCk27zu4PlMhuQPL8j/edit?usp=drive_link&ouid=109517368027716239770&rtpof=true&sd=true" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">05 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 2.2</div>
-            <div class="card-desc">Hoja de cálculo, organizador gráfico (Mapa Mental).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/16n-MJEGxTdxQbqIUI40GZDwaESdqlvhy/view?usp=drive_link" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-
-        <div class="activity-card">
-          <div class="card-number">06 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 2.4</div>
-            <div class="card-desc">Presentaciones dinámicas con IA Gen.</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1iaMD8jzjOPUoah9x8Y6laW61L3Tf8E_p/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">07 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 3.1</div>
-            <div class="card-desc">Políticas de UABC y protección de datos personales y contenido del curso (Opinión foro).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/15cqDkdQ2Asx2eE3z3ka6setBhBVuv0PR/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">08 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 3.1</div>
-            <div class="card-desc">Políticas de UABC y protección de datos personales y contenido del curso (Mapa conceptual).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1lKuNVKk3LcEDwloOY2xA3Cn2vFMkK7si/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">09 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 3.2</div>
-            <div class="card-desc">Sesiones en Meet de Google, grupos y anuncios (Infografía).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1889XgMWG2slx_PQXjpxISietJyjQ1BFN/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">10 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 3.3</div>
-            <div class="card-desc">Calendario, debate y libro de calificaciones (Video).</div>
-            <a class="card-link" href="https://www.youtube.com/watch?v=lJnr0BoNc6k" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">11 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 3.4</div>
-            <div class="card-desc">Otras plataformas de e-learning (Genially).</div>
-            <a class="card-link" href="https://view.genially.com/6a1729c11623d4034fd0e716" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">12 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 4.1</div>
-            <div class="card-desc">Almacenamiento físico (Infografía).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1bJ4wuSIJ2PDd_TYFn60Ao76o5NisPvYp/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">13 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 4.2</div>
-            <div class="card-desc">Almacenamiento on-line (Tabla comparativa).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1u6KBNwXQfrz8LNwjrUJTO8zMjJ_V9yVE/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">14 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 5.1</div>
-            <div class="card-desc">Gestores Bibliográficos (Infografía).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1we9_9Y_8oLlcCR8jLWUYZfdXLGg4Wdnr/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">15 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 5.1</div>
-            <div class="card-desc">Gestores Bibliográficos (Presentación).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1ARW2mcCdn7W4f_GZsGj9MJjXv_ZNMnXl/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">16 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 5.2</div>
-            <div class="card-desc">Administración de Proyectos y Colaboración (Infografía).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/18lN-bsuwycheQLJwz9MSfIMCX7XL7fql/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">17 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 5.2</div>
-            <div class="card-desc">Administración de Proyectos y Colaboración (Práctica).</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1VVmAWKENfsRtbDzR_BB4R08B3g-6xu1-/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="activity-card">
-          <div class="card-number">18 <span class="label">Actividad</span></div>
-          <div class="card-body">
-            <div class="card-title">Meta 5.3</div>
-            <div class="card-desc">Proyecto de divulgación.</div>
-            <a class="card-link" href="https://drive.google.com/file/d/1Z8NFFuhNNDPYYBGs7m7roUfMwYxBa8UK/view?usp=sharing" target="_blank">Ver Actividad
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-        </div>
-
-      </div><!-- /grid -->
-    </section>
-
-  </main>
-
-  <footer>
-    <strong>Daniela Guadalupe Rocha López</strong> &nbsp;·&nbsp; Portafolio Electrónico
-  </footer>
+    setTimeout(() => {
+      envelopeWrap.classList.add('hidden');
+      letterWrap.classList.add('visible');
+      letterWrap.setAttribute('aria-hidden', 'false');
+      envelopeWrap.setAttribute('aria-hidden', 'true');
+      letterWrap.querySelector('.letter').focus?.();
+    }, 750);
+  });
+</script>
 
 </body>
 </html>
